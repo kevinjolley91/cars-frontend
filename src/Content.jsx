@@ -33,6 +33,23 @@ export function Content() {
     setCurrentManufacturer(manufacturer);
   };
 
+  const handleUpdateManufacturer = (id, params, successCallback) => {
+    console.log("handleUpdateManufacturer", params);
+    axios.patch(`http://localhost:3000/manufacturers/${id}.json`, params).then((response) => {
+      setManufacturers(
+        manufacturers.map((manufacturer) => {
+          if (manufacturer.id === response.data.id) {
+            return response.data;
+          } else {
+            return manufacturer;
+          }
+        })
+      );
+      successCallback();
+      handleClose();
+    });
+  };
+
   const handleClose = () => {
     console.log("handleClose");
     setIsManufacturersShowVisible(false);
@@ -45,7 +62,7 @@ export function Content() {
       <ManufacturersNew onCreateManufacturer={handleCreateManufacturer} />
       <ManufacturersIndex manufacturers={manufacturers} onShowManufacturer={handleShowManufacturer} />
       <Modal show={isManufacturersShowVisible} onClose={handleClose}>
-        <ManufacturersShow manufacturer={currentManufacturer} />
+        <ManufacturersShow manufacturer={currentManufacturer} onUpdateManufacturer={handleUpdateManufacturer} />
       </Modal>
     </div>
   );
