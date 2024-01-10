@@ -9,6 +9,7 @@ export function ManufacturersIndex(props) {
           <img src={manufacturer.img_logo} height="150" width="300" alt={manufacturer.name} />
           <p>Year Established: {manufacturer.year_created}</p>
           <p>Country of Origin: {manufacturer.country}</p>
+          <button onClick={() => props.onShowManufacturer(manufacturer)}>More Info</button>
         </div>
       ))}
     </div>
