@@ -1,8 +1,15 @@
-export function ManufacturersNew() {
+/* eslint-disable react/prop-types */
+export function ManufacturersNew(props) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    props.onCreateManufacturer(params, () => event.target.reset());
+  };
+
   return (
     <div>
       <h1>New Manufacturer</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           Name: <input name="name" type="text" />
         </div>
@@ -15,6 +22,7 @@ export function ManufacturersNew() {
         <div>
           Country of Origin: <input name="country" type="text" />
         </div>
+        <button type="submit">Add Manufacturer</button>
       </form>
     </div>
   );
