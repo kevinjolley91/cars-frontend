@@ -14,11 +14,19 @@ export function Content() {
     });
   };
 
+  const handleCreateManufacturer = (params, successCallback) => {
+    console.log("handleCreateManufacturer", params);
+    axios.post("http://localhost:3000/manufacturers.json", params).then((response) => {
+      setManufacturers([...manufacturers, response.data]);
+      successCallback();
+    });
+  };
+
   useEffect(handleIndexManufacturers, []);
 
   return (
     <div>
-      <ManufacturersNew />
+      <ManufacturersNew onCreateManufacturer={handleCreateManufacturer} />
       <ManufacturersIndex manufacturers={manufacturers} />
     </div>
   );
