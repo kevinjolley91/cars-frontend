@@ -6,6 +6,10 @@ export function ManufacturersShow(props) {
     props.onUpdateManufacturer(props.manufacturer.id, params, () => event.target.reset());
   };
 
+  const handleClick = () => {
+    props.onDestroyManufacturer(props.manufacturer);
+  };
+
   return (
     <div>
       <h1>Manufacturer Information</h1>
@@ -27,6 +31,7 @@ export function ManufacturersShow(props) {
           Country of Origin: <input defaultValue={props.manufacturer.country} name="country" type="text" />
         </div>
         <button type="submit">Update Manufacturer</button>
+        <button onClick={handleClick}>Remove Manufacturer</button>
       </form>
     </div>
   );

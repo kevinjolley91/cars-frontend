@@ -55,6 +55,15 @@ export function Content() {
     setIsManufacturersShowVisible(false);
   };
 
+  const handleDestroyManufacturer = (manufacturer) => {
+    console.log("handleDestroyManufacturer", manufacturer);
+    // eslint-disable-next-line no-unused-vars
+    axios.delete(`http://localhost:3000/manufacturers/${manufacturer.id}.json`).then((response) => {
+      setManufacturers(manufacturers.filter((m) => m.id !== manufacturer.id));
+      handleClose();
+    });
+  };
+
   useEffect(handleIndexManufacturers, []);
 
   return (
@@ -62,7 +71,11 @@ export function Content() {
       <ManufacturersNew onCreateManufacturer={handleCreateManufacturer} />
       <ManufacturersIndex manufacturers={manufacturers} onShowManufacturer={handleShowManufacturer} />
       <Modal show={isManufacturersShowVisible} onClose={handleClose}>
-        <ManufacturersShow manufacturer={currentManufacturer} onUpdateManufacturer={handleUpdateManufacturer} />
+        <ManufacturersShow
+          manufacturer={currentManufacturer}
+          onUpdateManufacturer={handleUpdateManufacturer}
+          onDestroyManufacturer={handleDestroyManufacturer}
+        />
       </Modal>
     </div>
   );
