@@ -4,6 +4,7 @@ import { ManufacturersIndex } from "./ManufacturersIndex";
 import { ManufacturersNew } from "./ManufacturersNew";
 import { ManufacturersShow } from "./ManufacturersShow";
 import { ModelsIndex } from "./ModelsIndex";
+import { ModelsNew } from "./ModelsNew";
 import { Modal } from "./Modal";
 
 export function Content() {
@@ -74,6 +75,14 @@ export function Content() {
     });
   };
 
+  const handleCreateModel = (params, successCallback) => {
+    console.log("handleCreateModel", params);
+    axios.post("http://localhost:3000/models.json", params).then((response) => {
+      setModels([...models, response.data]);
+      successCallback();
+    });
+  };
+
   useEffect(handleIndexManufacturers, []);
   useEffect(handleIndexModels, []);
 
@@ -88,6 +97,7 @@ export function Content() {
           onDestroyManufacturer={handleDestroyManufacturer}
         />
       </Modal>
+      <ModelsNew onCreateModel={handleCreateModel} />
       <ModelsIndex models={models} />
     </div>
   );
