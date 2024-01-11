@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import { ManufacturersIndex } from "./ManufacturersIndex";
 import { ManufacturersNew } from "./ManufacturersNew";
 import { ManufacturersShow } from "./ManufacturersShow";
+import { ModelsIndex } from "./ModelsIndex";
 import { Modal } from "./Modal";
 
 export function Content() {
   const [manufacturers, setManufacturers] = useState([]);
   const [isManufacturersShowVisible, setIsManufacturersShowVisible] = useState(false);
   const [currentManufacturer, setCurrentManufacturer] = useState({});
+  const [models, setModels] = useState([]);
 
   const handleIndexManufacturers = () => {
     console.log("handleIndexManufacturers");
@@ -64,7 +66,16 @@ export function Content() {
     });
   };
 
+  const handleIndexModels = () => {
+    console.log("handleIndexModels");
+    axios.get("http://localhost:3000/models.json").then((response) => {
+      console.log(response.data);
+      setModels(response.data);
+    });
+  };
+
   useEffect(handleIndexManufacturers, []);
+  useEffect(handleIndexModels, []);
 
   return (
     <div>
@@ -77,6 +88,7 @@ export function Content() {
           onDestroyManufacturer={handleDestroyManufacturer}
         />
       </Modal>
+      <ModelsIndex models={models} />
     </div>
   );
 }

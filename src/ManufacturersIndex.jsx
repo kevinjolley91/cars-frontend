@@ -6,7 +6,7 @@ export function ManufacturersIndex(props) {
       {props.manufacturers.map((manufacturer) => (
         <div key={manufacturer.id}>
           <h2>{manufacturer.name}</h2>
-          <img src={manufacturer.img_logo} height="150" width="300" alt={manufacturer.name} />
+          <img src={manufacturer.img_logo} height="200" width="400" alt={manufacturer.name} />
           <p>Year Established: {manufacturer.year_created}</p>
           <p>Country of Origin: {manufacturer.country}</p>
           <button onClick={() => props.onShowManufacturer(manufacturer)}>More Info</button>
