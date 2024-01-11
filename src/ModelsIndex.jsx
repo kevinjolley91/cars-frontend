@@ -7,7 +7,7 @@ export function ModelsIndex(props) {
         <div key={model.id}>
           <h2>{model.name}</h2>
           <img src={model.img} height="300" width="450" />
-          <p>Manufacturer: {model.manufacturer_id}</p>
+          <p>Manufacturer: {model.manufacturer.name}</p>
           <p>Year Introduced: {model.year_introduced}</p>
           <p>Body Styles: {model.body_styles}</p>
         </div>
