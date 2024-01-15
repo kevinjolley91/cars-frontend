@@ -93,6 +93,23 @@ export function Content() {
     setCurrentModel(model);
   };
 
+  const handleUpdateModel = (id, params, successCallback) => {
+    console.log("handleUpdateModel", params);
+    axios.patch(`http://localhost:3000/models/${id}.json`, params).then((response) => {
+      setModels(
+        models.map((model) => {
+          if (model.id === response.data.id) {
+            return response.data;
+          } else {
+            return model;
+          }
+        })
+      );
+      successCallback();
+      handleClose();
+    });
+  };
+
   useEffect(handleIndexManufacturers, []);
   useEffect(handleIndexModels, []);
 
@@ -110,7 +127,7 @@ export function Content() {
       <ModelsNew onCreateModel={handleCreateModel} />
       <ModelsIndex models={models} onShowModel={handleShowModel} />
       <Modal show={isModelsShowVisible} onClose={handleClose}>
-        <ModelsShow model={currentModel} />
+        <ModelsShow model={currentModel} onUpdateModel={handleUpdateModel} />
       </Modal>
     </div>
   );
