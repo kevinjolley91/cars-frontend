@@ -31,8 +31,8 @@ export function ManufacturersShow(props) {
           Country of Origin: <input defaultValue={props.manufacturer.country} name="country" type="text" />
         </div>
         <button type="submit">Update Manufacturer</button>
-        <button onClick={handleClick}>Remove Manufacturer</button>
       </form>
+      <button onClick={handleClick}>Remove Manufacturer</button>
     </div>
   );
 }

@@ -110,6 +110,15 @@ export function Content() {
     });
   };
 
+  const handleDestroyModel = (model) => {
+    console.log("handleDestroyModel", model);
+    // eslint-disable-next-line no-unused-vars
+    axios.delete(`http://localhost:3000/models/${model.id}.json`).then((response) => {
+      setModels(models.filter((m) => m.id !== model.id));
+      handleClose();
+    });
+  };
+
   useEffect(handleIndexManufacturers, []);
   useEffect(handleIndexModels, []);
 
@@ -127,7 +136,7 @@ export function Content() {
       <ModelsNew onCreateModel={handleCreateModel} />
       <ModelsIndex models={models} onShowModel={handleShowModel} />
       <Modal show={isModelsShowVisible} onClose={handleClose}>
-        <ModelsShow model={currentModel} onUpdateModel={handleUpdateModel} />
+        <ModelsShow model={currentModel} onUpdateModel={handleUpdateModel} onDestroyModel={handleDestroyModel} />
       </Modal>
     </div>
   );

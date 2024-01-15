@@ -6,6 +6,10 @@ export function ModelsShow(props) {
     props.onUpdateModel(props.model.id, params, () => event.target.reset());
   };
 
+  const handleClick = () => {
+    props.onDestroyModel(props.model);
+  };
+
   return (
     <div>
       <h1>Model Information</h1>
@@ -32,6 +36,7 @@ export function ModelsShow(props) {
         </div>
         <button type="submit">Update Model</button>
       </form>
+      <button onClick={handleClick}>Remove Model</button>
     </div>
   );
 }
