@@ -10,6 +10,7 @@ export function ModelsIndex(props) {
           <p>Manufacturer: {model.manufacturer.name}</p>
           <p>Year Introduced: {model.year_introduced}</p>
           <p>Body Styles: {model.body_styles}</p>
+          <button onClick={() => props.onShowModel(model)}>More Info</button>
         </div>
       ))}
     </div>

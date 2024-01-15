@@ -14,7 +14,7 @@ export function ManufacturersShow(props) {
     <div>
       <h1>Manufacturer Information</h1>
       <p>Name: {props.manufacturer.name}</p>
-      <img src={props.manufacturer.img_logo} height="200" width="400" />
+      <img src={props.manufacturer.img_logo} height="300" width="600" alt={props.manufacturer.name} />
       <p>Year Established: {props.manufacturer.year_created}</p>
       <p>Country of Origin: {props.manufacturer.country}</p>
       <form onSubmit={handleSubmit}>

@@ -5,6 +5,7 @@ import { ManufacturersNew } from "./ManufacturersNew";
 import { ManufacturersShow } from "./ManufacturersShow";
 import { ModelsIndex } from "./ModelsIndex";
 import { ModelsNew } from "./ModelsNew";
+import { ModelsShow } from "./ModelsShow";
 import { Modal } from "./Modal";
 
 export function Content() {
@@ -12,6 +13,8 @@ export function Content() {
   const [isManufacturersShowVisible, setIsManufacturersShowVisible] = useState(false);
   const [currentManufacturer, setCurrentManufacturer] = useState({});
   const [models, setModels] = useState([]);
+  const [isModelsShowVisible, setIsModelsShowVisible] = useState(false);
+  const [currentModel, setCurrentModel] = useState({});
 
   const handleIndexManufacturers = () => {
     console.log("handleIndexManufacturers");
@@ -56,6 +59,7 @@ export function Content() {
   const handleClose = () => {
     console.log("handleClose");
     setIsManufacturersShowVisible(false);
+    setIsModelsShowVisible(false);
   };
 
   const handleDestroyManufacturer = (manufacturer) => {
@@ -83,6 +87,12 @@ export function Content() {
     });
   };
 
+  const handleShowModel = (model) => {
+    console.log("handleShowModel", model);
+    setIsModelsShowVisible(true);
+    setCurrentModel(model);
+  };
+
   useEffect(handleIndexManufacturers, []);
   useEffect(handleIndexModels, []);
 
@@ -98,7 +108,10 @@ export function Content() {
         />
       </Modal>
       <ModelsNew onCreateModel={handleCreateModel} />
-      <ModelsIndex models={models} />
+      <ModelsIndex models={models} onShowModel={handleShowModel} />
+      <Modal show={isModelsShowVisible} onClose={handleClose}>
+        <ModelsShow model={currentModel} />
+      </Modal>
     </div>
   );
 }
